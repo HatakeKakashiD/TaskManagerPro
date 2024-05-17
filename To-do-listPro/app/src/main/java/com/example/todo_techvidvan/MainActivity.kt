@@ -1,7 +1,7 @@
 package com.example.todo_techvidvan
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.todo_techvidvan.databinding.ActivityMainBinding
@@ -15,7 +15,7 @@ class MainActivity : AppCompatActivity(), TaskItemListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root) // Ensure this sets the content to activity_main.xml
+        setContentView(binding.root)
 
         binding.newTaskButton.setOnClickListener {
             NewTaskSheet(null).show(supportFragmentManager, "newTaskTag")
@@ -24,11 +24,10 @@ class MainActivity : AppCompatActivity(), TaskItemListener {
     }
 
     private fun setRecyclerView() {
-        val mainActivity = this
-        taskViewModel.taskItems.observe(this) {
+        taskViewModel.taskItems.observe(this) { tasks ->
             binding.todoListRecyclerView.apply {
-                layoutManager = LinearLayoutManager(applicationContext)
-                adapter = TaskItemAdapter(it, mainActivity)
+                layoutManager = LinearLayoutManager(this@MainActivity)
+                adapter = TaskItemAdapter(tasks, this@MainActivity)
             }
         }
     }

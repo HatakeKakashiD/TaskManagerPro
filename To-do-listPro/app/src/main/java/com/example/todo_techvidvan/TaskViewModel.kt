@@ -37,5 +37,3 @@ class TaskItemModelFactory(private val repository: TaskItemRepository) : ViewMod
         throw IllegalArgumentException("Unknown ViewModel class")
     }
 }
-
-
